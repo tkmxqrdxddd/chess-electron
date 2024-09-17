@@ -10,11 +10,11 @@ depends=('electron')
 makedepends=('npm' 'nodejs')
 options=(!debug)
 source=("$pkgname-$pkgver.tar.gz::$url/archive/v$pkgver.tar.gz")
-sha256sums=('SKIP')
+sha256sums=('2adcaacdd172e2f3b70e215cb48738008018716e0058abeb1e6855adb9aaf16a')
 
 prepare() {
   cd "$srcdir/$pkgname-$pkgver"
-  npm install --only=production --no-dev
+  npm install --only=production --omit=dev
 }
 
 package() {
