@@ -9,12 +9,8 @@
     "dist": "electron-builder"
   },
   "keywords": [],
-  "author": {
-    "name": "Jan Fidra",
-    "email": "tkmxqrd@gmail.com"
-  },
+  "author": "",
   "license": "ISC",
-  "homepage": "https://github.com/tkmxqrdxddd/chess-electron",
   "devDependencies": {
     "electron": "^32.1.0",
     "electron-builder": "^25.0.5"
@@ -27,8 +23,7 @@
         "AppImage",
         "deb"
       ],
-      "category": "Game",
-      "maintainer": "Jan Fidra <tkmxqrd@gmail.com>"
+      "category": "Game"
     }
   }
 }

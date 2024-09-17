@@ -1,0 +1,9 @@
+Package: chess-electron
+Version: 1.0.0-1
+Section: games
+Priority: optional
+Architecture: amd64
+Depends: electron
+Maintainer: Your Name <your.email@example.com>
+Description: Chess.com desktop app
+ An Electron-based desktop application for playing chess on Chess.com.
