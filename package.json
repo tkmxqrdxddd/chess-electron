@@ -3,30 +3,24 @@
   "version": "1.0.0",
   "description": "Chess.com desktop app",
   "main": "main.js",
-  "homepage": "https://github.com/tkmxqrdxddd/chess-electron",
-  "author": {
-    "name": "Jan Fidra",
-    "email": "tkmxqrd@gmail.com"
-  },
-  "license": "ISC",
   "scripts": {
     "start": "electron .",
     "pack": "electron-builder --dir",
     "dist": "electron-builder"
   },
-  "keywords": [],
   "build": {
     "appId": "com.tkmxqrd.chess-electron",
     "productName": "Chess.com Desktop",
     "linux": {
-      "target": [
-        "AppImage",
-        "deb"
-      ],
-      "category": "Game",
-      "maintainer": "Jan Fidra <tkmxqrd@gmail.com>"
+      "target": ["dir"],
+      "artifactName": "${productName}-${version}.${ext}"
     }
   },
+  "author": {
+    "name": "Jan Fidra",
+    "email": "tkmxqrd@gmail.com"
+  },
+  "license": "ISC",
   "devDependencies": {
     "electron": "^32.1.0",
     "electron-builder": "^25.0.5"
