@@ -130,3 +130,6 @@ dist
 .pnp.*
 dist
 pkg/
+src/chess-electron-1.0.0/chess-electron_1.0.0-1
+src/chess-electron-1.0.0/chess-electron_1.0.0-1/DEBIAN
+src/chess-electron-1.0.0.tar.gz
