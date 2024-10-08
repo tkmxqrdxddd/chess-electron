@@ -7,7 +7,6 @@ arch=('x86_64')
 url="https://github.com/tkmxqrdxddd/chess-electron"
 license=('ISC')
 depends=('electron')
-makedepends=('wget')
 source=("https://www.chess.com/favicon.ico")
 md5sums=('SKIP')
 
