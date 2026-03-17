@@ -1,4 +1,4 @@
-const { app, BrowserWindow } = require('electron')
+const { app, BrowserWindow, session } = require('electron')
 const path = require('path')
 
 function createWindow () {
@@ -7,11 +7,39 @@ function createWindow () {
     height: 800,
     webPreferences: {
       nodeIntegration: false,
-      contextIsolation: true
+      contextIsolation: true,
+      sandbox: true
+    },
+    icon: path.join(__dirname, 'favicon.ico')
+  })
+
+  // Load Chess.com
+  win.loadURL('https://www.chess.com')
+
+  // Apply Content Security Policy
+  session.defaultSession.webRequest.onHeadersReceived((details, callback) => {
+    callback({
+      responseHeaders: {
+        ...details.responseHeaders,
+        'Content-Security-Policy': ["default-src 'self' https: 'unsafe-inline' 'unsafe-eval'"]
+      }
+    })
+  })
+
+  // Prevent navigation to external URLs
+  win.webContents.on('will-navigate', (event, url) => {
+    if (!url.startsWith('https://www.chess.com') && !url.startsWith('https://chess.com')) {
+      event.preventDefault()
     }
   })
 
-  win.loadURL('https://www.chess.com')
+  // Prevent creating new windows
+  win.webContents.setWindowOpenHandler(({ url }) => {
+    if (url.startsWith('https://www.chess.com') || url.startsWith('https://chess.com')) {
+      win.loadURL(url)
+    }
+    return { action: 'deny' }
+  })
 
   // Uncomment the following line to open DevTools by default
   // win.webContents.openDevTools()
