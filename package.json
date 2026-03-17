@@ -23,7 +23,7 @@
       "favicon.ico"
     ],
     "linux": {
-      "target": ["AppImage", "deb", "rpm", "dir"],
+      "target": ["deb", "rpm", "dir"],
       "artifactName": "${productName}-${version}-${arch}.${ext}",
       "category": "Game"
     },
