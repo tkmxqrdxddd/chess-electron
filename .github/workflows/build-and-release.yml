@@ -12,6 +12,8 @@ permissions:
 jobs:
   build-deb:
     runs-on: ubuntu-latest
+    outputs:
+      tag-name: ${{ steps.get-tag.outputs.TAG_NAME }}
 
     steps:
       - name: Checkout repository
@@ -48,16 +50,9 @@ jobs:
           path: dist/*.deb
           retention-days: 30
 
-      - name: Create Release
-        if: startsWith(github.ref, 'refs/tags/')
-        uses: softprops/action-gh-release@v2
-        with:
-          files: dist/*.deb
-          draft: false
-          prerelease: false
-          generate_release_notes: true
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Get tag name
+        id: get-tag
+        run: echo "TAG_NAME=${GITHUB_REF#refs/tags/}" >> $GITHUB_OUTPUT
 
   build-rpm:
     runs-on: ubuntu-latest
@@ -142,3 +137,45 @@ jobs:
           name: chess-electron-macos
           path: dist/*.dmg
           retention-days: 30
+
+  create-release:
+    needs: [build-deb, build-rpm, build-windows, build-macos]
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Download .deb artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: chess-electron-deb
+          path: release-files
+
+      - name: Download .rpm artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: chess-electron-rpm
+          path: release-files
+
+      - name: Download Windows artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: chess-electron-windows
+          path: release-files
+
+      - name: Download macOS artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: chess-electron-macos
+          path: release-files
+
+      - name: List release files
+        run: ls -la release-files/
+
+      - name: Create Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: release-files/*
+          draft: false
+          prerelease: false
+          generate_release_notes: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
