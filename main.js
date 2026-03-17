@@ -1,5 +1,6 @@
 const { app, BrowserWindow, session } = require('electron')
 const path = require('path')
+const { URL } = require('url')
 
 function createWindow () {
   const win = new BrowserWindow({
@@ -28,15 +29,27 @@ function createWindow () {
 
   // Prevent navigation to external URLs
   win.webContents.on('will-navigate', (event, url) => {
-    if (!url.startsWith('https://www.chess.com') && !url.startsWith('https://chess.com')) {
+    const allowedHosts = ['www.chess.com', 'chess.com']
+    try {
+      const parsedUrl = new URL(url)
+      if (!allowedHosts.includes(parsedUrl.hostname)) {
+        event.preventDefault()
+      }
+    } catch (e) {
       event.preventDefault()
     }
   })
 
   // Prevent creating new windows
   win.webContents.setWindowOpenHandler(({ url }) => {
-    if (url.startsWith('https://www.chess.com') || url.startsWith('https://chess.com')) {
-      win.loadURL(url)
+    const allowedHosts = ['www.chess.com', 'chess.com']
+    try {
+      const parsedUrl = new URL(url)
+      if (allowedHosts.includes(parsedUrl.hostname)) {
+        win.loadURL(url)
+      }
+    } catch (e) {
+      // Invalid URL, deny by default
     }
     return { action: 'deny' }
   })
