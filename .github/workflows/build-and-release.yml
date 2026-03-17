@@ -33,7 +33,7 @@ jobs:
         continue-on-error: true
 
       - name: Build .deb package
-        run: npm run dist:deb
+        run: npm run dist:deb -- --publish never
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -71,7 +71,7 @@ jobs:
         run: npm ci
 
       - name: Build .rpm package
-        run: npm run dist:rpm
+        run: npm run dist:rpm -- --publish never
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -99,7 +99,7 @@ jobs:
         run: npm ci
 
       - name: Build Windows installer
-        run: npm run dist
+        run: npm run dist -- --publish never
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -127,7 +127,7 @@ jobs:
         run: npm ci
 
       - name: Build macOS DMG
-        run: npm run dist
+        run: npm run dist -- --publish never
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
