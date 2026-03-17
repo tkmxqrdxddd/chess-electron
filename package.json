@@ -1,19 +1,50 @@
 {
   "name": "chess-electron",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "Chess.com desktop app",
   "main": "main.js",
   "scripts": {
     "start": "electron .",
     "pack": "electron-builder --dir",
-    "dist": "electron-builder"
+    "dist": "electron-builder",
+    "lint": "eslint ."
   },
   "build": {
     "appId": "com.tkmxqrd.chess-electron",
     "productName": "Chess.com Desktop",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "main.js",
+      "favicon.ico"
+    ],
     "linux": {
-      "target": ["dir"],
-      "artifactName": "${productName}-${version}.${ext}"
+      "target": ["AppImage", "deb", "rpm", "dir"],
+      "artifactName": "${productName}-${version}-${arch}.${ext}",
+      "category": "Game",
+      "icon": "favicon"
+    },
+    "win": {
+      "target": ["nsis", "portable"],
+      "artifactName": "${productName}-${version}.${ext}",
+      "icon": "favicon.ico"
+    },
+    "mac": {
+      "target": ["dmg", "zip"],
+      "artifactName": "${productName}-${version}.${ext}",
+      "icon": "favicon.icns",
+      "category": "public.app-category.games"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true
+    },
+    "deb": {
+      "depends": ["electron"]
+    },
+    "rpm": {
+      "depends": ["electron"]
     }
   },
   "author": {
@@ -23,6 +54,7 @@
   "license": "ISC",
   "devDependencies": {
     "electron": "^32.1.0",
-    "electron-builder": "^25.0.5"
+    "electron-builder": "^25.0.5",
+    "eslint": "^8.57.0"
   }
 }
