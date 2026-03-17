@@ -22,7 +22,7 @@ function createWindow () {
     callback({
       responseHeaders: {
         ...details.responseHeaders,
-        'Content-Security-Policy': ["default-src 'self' https: 'unsafe-inline' 'unsafe-eval'"]
+        'Content-Security-Policy': ['default-src \'self\' https: \'unsafe-inline\' \'unsafe-eval\'']
       }
     })
   })
@@ -35,7 +35,7 @@ function createWindow () {
       if (!allowedHosts.includes(parsedUrl.hostname)) {
         event.preventDefault()
       }
-    } catch (e) {
+    } catch {
       event.preventDefault()
     }
   })
@@ -48,7 +48,7 @@ function createWindow () {
       if (allowedHosts.includes(parsedUrl.hostname)) {
         win.loadURL(url)
       }
-    } catch (e) {
+    } catch {
       // Invalid URL, deny by default
     }
     return { action: 'deny' }
