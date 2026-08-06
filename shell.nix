@@ -4,7 +4,7 @@ pkgs.mkShell {
   name = "chess-electron-dev";
   
   buildInputs = with pkgs; [
-    nodejs_20
+    nodejs_22
     npm
     electron_35
     libsecret
