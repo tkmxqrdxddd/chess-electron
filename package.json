@@ -1,6 +1,6 @@
 {
   "name": "chess-electron",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "description": "Chess.com desktop app",
   "main": "main.js",
   "scripts": {
@@ -23,16 +23,26 @@
       "favicon.ico"
     ],
     "linux": {
-      "target": ["deb", "rpm", "dir"],
+      "target": [
+        "deb",
+        "rpm",
+        "dir"
+      ],
       "artifactName": "${productName}-${version}-${arch}.${ext}",
       "category": "Game"
     },
     "win": {
-      "target": ["nsis", "portable"],
+      "target": [
+        "nsis",
+        "portable"
+      ],
       "artifactName": "${productName}-${version}.${ext}"
     },
     "mac": {
-      "target": ["dmg", "zip"],
+      "target": [
+        "dmg",
+        "zip"
+      ],
       "artifactName": "${productName}-${version}.${ext}",
       "category": "public.app-category.games"
     },
@@ -41,10 +51,14 @@
       "allowToChangeInstallationDirectory": true
     },
     "deb": {
-      "depends": ["electron"]
+      "depends": [
+        "electron"
+      ]
     },
     "rpm": {
-      "depends": ["electron"]
+      "depends": [
+        "electron"
+      ]
     }
   },
   "author": {

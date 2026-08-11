@@ -1,6 +1,6 @@
 # Maintainer: Jan Fidra <tkmxqrd@gmail.com>
 pkgname=chess-electron
-pkgver=2.0.0
+pkgver=2.1.0
 pkgrel=1
 pkgdesc="Chess.com desktop app"
 arch=('x86_64')
