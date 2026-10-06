@@ -18,11 +18,12 @@ function createWindow () {
   win.loadURL('https://www.chess.com')
 
   // Apply Content Security Policy
+  // Restrict to only trusted sources; remove unsafe-inline and unsafe-eval
   session.defaultSession.webRequest.onHeadersReceived((details, callback) => {
     callback({
       responseHeaders: {
         ...details.responseHeaders,
-        'Content-Security-Policy': ['default-src \'self\' https: \'unsafe-inline\' \'unsafe-eval\'']
+        'Content-Security-Policy': ['default-src "self" https:']
       }
     })
   })
